@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group>
+        <system systemId="https://schema.broservices.nl/wsdl/isbhr-gt/0.1/isbhr-gt.wsdl" uri="../wsdl/isbhr-gt.wsdl" />
+        <system systemId="https://schema.broservices.nl/xsd/isbhr-gt/0.1/isbhr-gt-messages.xsd" uri="../schema/isbhr-gt-messages.xsd" />
+
+        <!-- schema's van maven dependencies -->
+        <system systemId="https://schema.broservices.nl/xsd/bhrgtcommon/0.1/bhrgtcommon.xsd" uri="maven:com.example:common_xsd!/schema/bhrgtcommon.xsd"/>
+    </group>
+</catalog>

@@ -1,0 +1,16 @@
+<jaxb:bindings version="1.0"
+               xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:annox="http://annox.dev.java.net"
+               jaxb:extensionBindingPrefixes="xjc">
+
+
+    <jaxb:bindings schemaLocation="https://schema.broservices.nl/xsd/isbhr-gt/0.1/isbhr-gt-messages.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="nl.broservices.xsd.isbhrgt.v_1_0" />
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>
+

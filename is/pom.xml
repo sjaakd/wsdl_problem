@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>combined</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>is_wsdl</artifactId>
+    <name>IS - XSD / WSDL</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.jvnet.ogc</groupId>
+            <artifactId>gml-v_3_2_0</artifactId>
+            <version>LATEST</version>
+        </dependency>
+
+        <!-- BHR Common -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>common_xsd</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.jaxb2_commons</groupId>
+            <artifactId>jaxb2-basics-runtime</artifactId>
+            <version>1.11.1</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <configuration>
+                    <strict>false</strict>
+                    <schemaDirectory>${project.basedir}/src/main/resources</schemaDirectory>
+                    <schemas>
+                        <schema>
+                            <url>https://schema.broservices.nl/xsd/isbhr-gt/0.1/isbhr-gt-messages.xsd</url>
+                        </schema>
+                    </schemas>
+                    <bindingDirectory>${project.basedir}/src/main/resources/META-INF/</bindingDirectory>
+                    <bindingIncludes>
+                        <include>binding.xjb</include>
+                    </bindingIncludes>
+                    <catalog>${project.basedir}/src/main/resources/META-INF/catalog.xml</catalog>
+                    <useDependenciesAsEpisodes>true</useDependenciesAsEpisodes>
+                    <args>
+                        <arg>-npa</arg>
+                        <arg>-Xcopyable</arg>
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>1.11.1</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+      
+        </plugins>
+    </build>
+
+</project>

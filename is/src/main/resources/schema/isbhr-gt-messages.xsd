@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:isbhrgt="http://www.broservices.nl/xsd/isbhr-gt/0.1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:bhrgtcom="http://www.broservices.nl/xsd/bhrgtcommon/0.1"
+           xmlns:gml="http://www.opengis.net/gml/3.2"
+           targetNamespace="http://www.broservices.nl/xsd/isbhr-gt/0.1"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="0.1.2">
+
+    <xs:import namespace="http://www.broservices.nl/xsd/bhrgtcommon/0.1" schemaLocation="https://schema.broservices.nl/xsd/bhrgtcommon/0.1/bhrgtcommon.xsd"/>
+    <xs:import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+
+    <xs:element name="intakeResponse" type="xs:string" />
+    <xs:element name="parseFault" type="xs:string" />
+
+    <xs:element name="BHR_GT"
+                type="isbhrgt:BHR_GTType"
+                substitutionGroup="gml:AbstractFeature">
+    </xs:element>
+    <xs:complexType name="BHR_GTType">
+        <xs:complexContent>
+            <xs:extension base="gml:AbstractFeatureType">
+                <xs:sequence>
+                    <xs:element minOccurs="1"
+                                maxOccurs="1"
+                                name="boring"
+                                nillable="false"
+                                type="bhrgtcom:BoringPropertyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="BHR_GTPropertyType">
+        <xs:sequence minOccurs="0">
+            <xs:element ref="isbhrgt:BHR_GT"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+    </xs:complexType>
+
+    <xs:element name="registrationRequest" type="isbhrgt:RegistrationRequestType" />
+    <xs:complexType name="RegistrationRequestType">
+                <xs:sequence>
+                    <xs:element name="sourceDocument"
+                                type="isbhrgt:BHR_GTPropertyType"
+                                minOccurs="1"
+                                maxOccurs="1">
+                    </xs:element>
+                </xs:sequence>
+    </xs:complexType>
+</xs:schema>

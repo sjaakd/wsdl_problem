@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:bhrgtcom="http://www.broservices.nl/xsd/bhrgtcommon/0.1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:gml="http://www.opengis.net/gml/3.2"
+           xmlns:om="http://www.opengis.net/om/2.0"
+           xmlns:sam="http://www.opengis.net/sampling/2.0"
+           targetNamespace="http://www.broservices.nl/xsd/bhrgtcommon/0.1"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="0.1.3">
+
+   <xs:import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <xs:import namespace="http://www.opengis.net/om/2.0"
+              schemaLocation="http://schemas.opengis.net/om/2.0/observation.xsd"/>
+   <xs:import namespace="http://www.opengis.net/sampling/2.0"
+              schemaLocation="http://schemas.opengis.net/sampling/2.0/samplingFeature.xsd"/>
+
+   <xs:element name="BhrObservation"
+               type="bhrgtcom:BhrObservationType"
+               substitutionGroup="om:OM_Observation"></xs:element>
+   <xs:element name="result" type="bhrgtcom:DescriptiveBoreholeLogType" substitutionGroup="om:result"/>
+   <xs:complexType name="BhrObservationType">
+      <xs:complexContent>
+         <xs:restriction base="om:OM_ObservationType">
+            <xs:sequence>
+               <xs:group ref="om:OM_CommonProperties"/>
+               <xs:element ref="bhrgtcom:result"/>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BhrObservationPropertyType">
+      <xs:sequence minOccurs="0">
+         <xs:element ref="bhrgtcom:BhrObservation"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+   </xs:complexType>
+   <xs:element name="BoreholeSampleDescription"
+               type="bhrgtcom:BoreholeSampleDescriptionType"
+               substitutionGroup="bhrgtcom:BhrObservation">
+   </xs:element>
+   <xs:complexType name="BoreholeSampleDescriptionType">
+      <xs:complexContent>
+         <xs:extension base="bhrgtcom:BhrObservationType">
+            <xs:sequence>
+               <xs:element name="descriptionOperator" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BoreholeSampleDescriptionPropertyType">
+      <xs:sequence minOccurs="0">
+         <xs:element ref="bhrgtcom:BoreholeSampleDescription"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+   </xs:complexType>
+   <xs:element name="Boring" type="bhrgtcom:BoringType" substitutionGroup="sam:SF_SamplingFeature"></xs:element>
+   <xs:complexType name="BoringType">
+      <xs:complexContent>
+         <xs:extension base="sam:SF_SamplingFeatureType">
+            <xs:sequence>
+               <xs:element name="preparation" minOccurs="1" maxOccurs="1" type="xs:string"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="BoringPropertyType">
+      <xs:sequence minOccurs="0">
+         <xs:element ref="bhrgtcom:Boring"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="gml:AssociationAttributeGroup"/>
+   </xs:complexType>
+   <xs:element name="Procedure" type="bhrgtcom:ProcedureType" substitutionGroup="gml:AbstractFeature"></xs:element>
+   <xs:complexType name="ProcedureType">
+      <xs:complexContent>
+         <xs:extension base="gml:AbstractFeatureType">
+            <xs:sequence>
+               <xs:element name="descriptionProcedure" minOccurs="1" maxOccurs="2" type="xs:string"></xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="DescriptiveBoreholeLogType">
+      <xs:sequence>
+         <xs:element name="describedMaterial" minOccurs="1" maxOccurs="1" type="xs:string"></xs:element>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>
